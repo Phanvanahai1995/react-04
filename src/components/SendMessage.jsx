@@ -1,5 +1,6 @@
 import emailjs from "@emailjs/browser";
 import { useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 function SendMessage({ user }) {
   const [isLoading, setLoading] = useState(false);
@@ -24,10 +25,12 @@ function SendMessage({ user }) {
       );
 
       if (!response.text) throw new Error("Send message fail!");
+      toast.success("Gửi yêu cầu thành công!");
       form.current.reset();
       console.log("SUCCESS!", response);
     } catch (err) {
       console.log(err);
+      toast.error("Gửi yêu cầu thất bại. Vui lòng thử lại");
     } finally {
       setLoading(false);
     }
